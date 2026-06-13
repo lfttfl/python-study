@@ -355,3 +355,56 @@ results.sort(key=lambda r: r[1], reverse=True)   # 按平均分降序排列
 print("排名：")
 for rank, (name, avg) in enumerate(results, start=1):   # 解包 + enumerate
     print(f"  第{rank}名：{name} — 平均 {avg} 分")
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 给定列表 nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]：
+   a. 去除重复元素并保持原有顺序（不用 set，保持顺序）
+   b. 找出出现次数最多的元素及其次数
+   c. 把列表分成两半，奇数索引的元素放一组，偶数索引的放另一组
+
+2. 用切片操作实现字符串翻转，不使用 reversed() 或 .reverse()。
+   验证 "racecar" 是回文。
+
+3. 使用命名元组 Card(suit, rank) 表示扑克牌，
+   创建完整的一副牌（4种花色 × 13种点数），
+   随机打乱顺序（import random; random.shuffle(deck)），
+   取前5张作为"手牌"并打印。
+
+4. 解释下面代码的输出，并修复 bug：
+   a = [1, 2, 3]
+   b = a          # bug：b 和 a 指向同一对象
+   b.append(4)
+   print(a)       # 预期 [1,2,3] 但实际是 [1,2,3,4]
+
+参考答案见下方注释：
+""")
+
+# # 答案1：
+# nums = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+# # a. 去重保序（用 dict.fromkeys 或手动）
+# unique = list(dict.fromkeys(nums))
+# print("去重保序：", unique)   # [3, 1, 4, 5, 9, 2, 6]
+# # b. 最频繁元素
+# from collections import Counter
+# most_common = Counter(nums).most_common(1)[0]
+# print(f"最多：{most_common[0]} 出现 {most_common[1]} 次")
+# # c. 奇偶分组
+# even_idx = nums[::2]   # 偶数索引（0,2,4...）
+# odd_idx  = nums[1::2]  # 奇数索引（1,3,5...）
+# print("偶数索引：", even_idx, "奇数索引：", odd_idx)
+#
+# # 答案3：
+# from collections import namedtuple
+# import random
+# Card = namedtuple("Card", ["suit", "rank"])
+# suits = ["♠", "♥", "♦", "♣"]
+# ranks = ["A", "2","3","4","5","6","7","8","9","10","J","Q","K"]
+# deck = [Card(s, r) for s in suits for r in ranks]
+# random.shuffle(deck)
+# hand = deck[:5]
+# print("手牌：", hand)

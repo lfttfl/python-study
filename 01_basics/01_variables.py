@@ -84,3 +84,54 @@ radius = 5                         # 圆的半径（整数）
 pi = 3.14159                       # 圆周率（浮点数）
 area = pi * radius ** 2            # ** 是幂运算，radius**2 = 25
 print(f"半径为 {radius} 的圆，面积 = {area:.2f}")  # :.2f 保留两位小数
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 定义变量 name（你的名字）、birth_year（出生年份）、height（身高，单位米），
+   计算你的年龄（2026 - birth_year），并用 f-string 打印：
+   "我叫XX，今年XX岁，身高X.XX米"
+
+2. 给定字符串 s = "  Hello, Python World!  "，
+   完成以下操作并打印结果：
+   a. 去除两端空白
+   b. 转为小写
+   c. 把 "world" 替换为 "learner"
+   d. 按空格拆分为列表
+   e. 判断 "python" 是否在 s 的小写版本中
+
+3. 把以下字符串转为对应类型，处理可能的错误：
+   values = ["42", "3.14", "True", "abc", "0"]
+   对每个值尝试 int()、float()、bool() 转换，打印结果或"转换失败"。
+
+参考答案见下方注释：
+""")
+
+# # 答案1：
+# name = "小明"
+# birth_year = 2000
+# height = 1.75
+# age = 2026 - birth_year
+# print(f"我叫{name}，今年{age}岁，身高{height:.2f}米")
+#
+# # 答案2：
+# s = "  Hello, Python World!  "
+# print(s.strip())                            # Hello, Python World!
+# print(s.strip().lower())                    # hello, python world!
+# print(s.strip().lower().replace("world", "learner"))
+# print(s.strip().split())                    # ['Hello,', 'Python', 'World!']
+# print("python" in s.lower())               # True
+#
+# # 答案3：
+# values = ["42", "3.14", "True", "abc", "0"]
+# for v in values:
+#     results = []
+#     for converter in [int, float, bool]:
+#         try:
+#             results.append(f"{converter.__name__}={converter(v)}")
+#         except ValueError:
+#             results.append(f"{converter.__name__}=失败")
+#     print(f"  '{v}': {', '.join(results)}")
