@@ -592,3 +592,63 @@ print(f"{'姓名':<6}{'分数':>6}{'等级':>6}")
 print("-" * 20)
 for r in sorted(results, key=lambda x: x["score"], reverse=True):
     print(f"{r['name']:<6}{r['score']:>6}{r['grade']:>6}")
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 写装饰器 @validate_types，在函数调用时检查所有带类型注解的参数，
+   若实参类型不符则抛出 TypeError。
+   示例：@validate_types 装饰 add(x: int, y: int)，
+   调用 add(1, "2") 应抛出 TypeError。
+
+2. 用闭包实现一个"限速器"：make_rate_limiter(max_calls, period_seconds)，
+   返回一个函数，该函数在 period_seconds 内最多只能被调用 max_calls 次，
+   超过则抛出 RuntimeError。
+   （提示：用 time.time() 记录调用时间戳，存在闭包变量里）
+
+3. 实现 pipe_lazy(*funcs)：与 pipe 相同，但返回的是生成器函数，
+   支持对可迭代对象的每个元素惰性地应用函数链。
+   示例：list(pipe_lazy(str.strip, str.upper)(["  a  ", "  b  "])) → ["A", "B"]
+
+4. 实现带超时的装饰器 @timeout(seconds)：如果被装饰函数运行超过 seconds 秒，
+   抛出 TimeoutError（提示：用 functools.wraps + signal 或 threading）。
+
+参考答案见下方注释：
+""")
+
+# # 答案1：类型验证装饰器
+# import functools, inspect
+# def validate_types(func):
+#     hints = func.__annotations__
+#     @functools.wraps(func)
+#     def wrapper(*args, **kwargs):
+#         bound = inspect.signature(func).bind(*args, **kwargs)
+#         bound.apply_defaults()
+#         for name, value in bound.arguments.items():
+#             if name in hints and not isinstance(value, hints[name]):
+#                 raise TypeError(f"参数 '{name}' 应为 {hints[name].__name__}，实际为 {type(value).__name__}")
+#         return func(*args, **kwargs)
+#     return wrapper
+#
+# @validate_types
+# def add(x: int, y: int) -> int:
+#     return x + y
+# print(add(1, 2))       # 3
+# try:
+#     add(1, "2")        # TypeError
+# except TypeError as e:
+#     print(e)
+#
+# # 答案3：pipe_lazy
+# def pipe_lazy(*funcs):
+#     def apply(iterable):
+#         for item in iterable:
+#             result = item
+#             for f in funcs:
+#                 result = f(result)
+#             yield result
+#     return apply
+# print(list(pipe_lazy(str.strip, str.upper)(["  a  ", "  b  "])))  # ['A', 'B']

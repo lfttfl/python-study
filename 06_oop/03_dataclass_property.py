@@ -1,7 +1,7 @@
 # Python 面向对象编程：dataclass、property、上下文管理器
 # =====================================================
 
-from dataclasses import dataclass, field, KW_ONLY
+from dataclasses import dataclass, field
 import dataclasses
 
 # ══════════════════════════════════════════════════════

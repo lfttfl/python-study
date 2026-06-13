@@ -23,11 +23,12 @@
 | [05_data_analysis](./05_data_analysis/) | 数据分析 | NumPy 数组、Pandas DataFrame、数据清洗与可视化 |
 | [06_oop](./06_oop/) | 面向对象 | 类与实例、魔法方法、继承、多态、抽象基类、dataclass |
 | [07_stdlib](./07_stdlib/) | 标准库 | collections、heapq、bisect、pathlib、异常处理进阶 |
+| [08_typing](./08_typing/) | 类型注解 | 基础注解、Optional/Union、Callable、泛型、Protocol、TypedDict |
 
 ## 学习路线
 
 ```
-01_basics → 02_data_structures → 03_functions → 04_file_io → 06_oop → 07_stdlib → 05_data_analysis
+01_basics → 02_data_structures → 03_functions → 04_file_io → 06_oop → 07_stdlib → 08_typing → 05_data_analysis
 ```
 
 每个模块包含详细注释的示例代码和末尾的练习题（附参考答案）。
@@ -77,3 +78,5 @@ pip install -r requirements.txt
 - [NumPy 官方文档](https://numpy.org/doc/)
 - [Pandas 官方文档](https://pandas.pydata.org/docs/)
 - [pytest 文档](https://docs.pytest.org/)
+- [mypy 文档](https://mypy.readthedocs.io/)（类型检查工具）
+- [Python typing 模块文档](https://docs.python.org/zh-cn/3/library/typing.html)

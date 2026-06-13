@@ -615,3 +615,55 @@ def count_alerts_by_source():
         print(f"  {src}：{len(list(grp))} 条")
 
 count_alerts_by_source()
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 实现生成器函数 windowed(iterable, n)，产出大小为 n 的滑动窗口（元组）：
+   windowed([1,2,3,4,5], 3) → (1,2,3), (2,3,4), (3,4,5)
+   （提示：用 deque(maxlen=n) 维护窗口）
+
+2. 实现无限生成器 prime_gen()，依次产出所有质数（2, 3, 5, 7, 11, ...）。
+   取前 20 个质数验证结果。
+
+3. 用 itertools.product 生成所有 3 位数密码（字符集：0-9 + a-z），
+   但不实际存储，只统计总数并找出其中字母开头的密码数量。
+   （提示：用 sum + 生成器表达式，不要用 list）
+
+4. 实现类 LazyRange，行为类似 range() 但支持负步长和 len()，
+   通过实现迭代器协议（__iter__、__next__、__len__）完成。
+
+参考答案见下方注释：
+""")
+
+# # 答案1：滑动窗口生成器
+# from collections import deque
+# def windowed(iterable, n):
+#     window = deque(maxlen=n)
+#     for item in iterable:
+#         window.append(item)
+#         if len(window) == n:
+#             yield tuple(window)
+# print(list(windowed([1,2,3,4,5], 3)))  # [(1,2,3),(2,3,4),(3,4,5)]
+#
+# # 答案2：质数生成器
+# def prime_gen():
+#     primes = []
+#     n = 2
+#     while True:
+#         if all(n % p != 0 for p in primes):
+#             primes.append(n)
+#             yield n
+#         n += 1
+# print(list(itertools.islice(prime_gen(), 20)))
+# # [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71]
+#
+# # 答案3：统计不实际存储
+# import string
+# charset = string.digits + string.ascii_lowercase   # '0123456789abcdefg...'
+# total = sum(1 for _ in itertools.product(charset, repeat=3))
+# alpha_start = sum(1 for combo in itertools.product(charset, repeat=3) if combo[0].isalpha())
+# print(f"总数：{total}，字母开头：{alpha_start}")

@@ -459,3 +459,52 @@ print(f"{'姓名':<6}{'手机':<14}{'邮箱':<22}{'余额':>10}")
 print("-" * 54)
 for c in contacts:
     print(f"{c['name']:<6}{c['phone']:<14}{c['email']:<22}{c['balance']:>10,.2f}")
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 写函数 count_words(text)，统计一段文本中每个单词出现的次数（忽略大小写、
+   忽略标点），返回按频次降序排列的列表 [(word, count), ...]。
+
+2. 用正则表达式从以下日志行中提取所有 IP 地址：
+   log = "192.168.1.1 - GET /index.html  10.0.0.255 - POST /api  172.16.254.1 - DELETE /user"
+   要求：只匹配合法的 IPv4 地址（每段 0-255）。
+
+3. 写函数 slugify(title)，把文章标题转为 URL slug：
+   - 转小写
+   - 把中文、空格、特殊字符替换为 "-"
+   - 合并连续的 "-"，去掉首尾 "-"
+   示例：slugify("Hello, World!  Python 3") → "hello-world-python-3"
+
+4. 用正则表达式验证密码强度：至少 8 位，包含大写字母、小写字母、数字、
+   特殊字符（!@#$%^&*）各至少一个。用前瞻断言实现。
+
+参考答案见下方注释：
+""")
+
+# # 答案2：提取 IP 地址
+# import re
+# log = "192.168.1.1 - GET /index.html  10.0.0.255 - POST /api  172.16.254.1 - DELETE /user"
+# ip_pattern = r'\b(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\b'
+# ips = re.findall(ip_pattern, log)
+# print("IP 地址：", ips)   # ['192.168.1.1', '10.0.0.255', '172.16.254.1']
+#
+# # 答案3：slugify
+# def slugify(title):
+#     import re
+#     title = title.lower()
+#     title = re.sub(r'[^\w\s-]', '-', title)   # 非字母数字替换为 -
+#     title = re.sub(r'[\s_]+', '-', title)      # 空格替换为 -
+#     title = re.sub(r'-+', '-', title)          # 合并连续 -
+#     return title.strip('-')
+# print(slugify("Hello, World!  Python 3"))      # hello-world-python-3
+#
+# # 答案4：密码强度
+# def strong_password(pwd):
+#     pattern = r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$'
+#     return bool(re.match(pattern, pwd))
+# print(strong_password("Abc123!@"))    # True
+# print(strong_password("abc123!@"))    # False（无大写）

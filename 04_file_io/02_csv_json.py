@@ -634,3 +634,42 @@ for item in all_items:
     print(f"  {item.name}")
 shutil.rmtree(WORK_DIR)                       # 删除整个临时目录
 print(f"已清理目录：{WORK_DIR.name}/")
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 给定 CSV 文件（自己创建），包含 name、age、city 三列：
+   a. 用 csv.DictReader 读取并打印每行
+   b. 筛选年龄 >= 18 的行，写入新 CSV 文件
+   c. 按 city 分组统计各城市的平均年龄
+
+2. 写函数 json_merge(file_list, output_path)：
+   读取多个 JSON 文件（每个文件是一个列表），合并为一个列表，
+   去除重复项（按 id 字段判断），写入 output_path。
+
+3. 写函数 csv_to_json(csv_path, json_path, key_field)：
+   把 CSV 转为 JSON，结果是以 key_field 列的值为键的字典，
+   例如 key_field="id" 时：{"001": {"name": "...", ...}, "002": {...}}
+
+4. 实现 safe_json_update(path, updates)：
+   读取现有 JSON 文件，用 updates 字典深度更新（嵌套字典合并而非覆盖），
+   写回原文件（用临时文件保证原子写入）。
+
+参考答案见下方注释：
+""")
+
+# # 答案3：csv_to_json
+# import csv, json
+# from pathlib import Path
+# def csv_to_json(csv_path, json_path, key_field):
+#     result = {}
+#     with open(csv_path, encoding="utf-8") as f:
+#         for row in csv.DictReader(f):
+#             key = row.pop(key_field)       # 取出 key_field 的值作为字典键
+#             result[key] = row
+#     Path(json_path).write_text(
+#         json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
+#     )

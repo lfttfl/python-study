@@ -567,3 +567,48 @@ for item in sorted(all_files):
 shutil.rmtree(WORK_DIR)                       # rmtree：递归删除，类似 rm -rf
 print(f"\n已删除整个工作目录：{WORK_DIR.name}/")
 print(f"目录存在：{WORK_DIR.exists()}")       # False：确认已删除
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 写函数 word_count_file(path)，读取一个文本文件，
+   返回 {"总行数": n, "总词数": n, "总字符数": n, "最长行": "..."} 的字典。
+
+2. 写函数 tail(path, n=10)，模拟 Linux tail 命令：
+   返回文件最后 n 行（不要把整个文件读入内存，用 deque(maxlen=n) 实现）。
+
+3. 写函数 find_and_replace(path, old, new, out_path=None)：
+   把文件中所有 old 替换为 new，结果写入 out_path（None 时覆盖原文件）。
+   要求：用临时文件保证原子写入（失败时不破坏原文件）。
+
+4. 写函数 merge_files(file_list, output_path, separator="\\n---\\n")：
+   把多个文本文件合并为一个，各文件内容之间用 separator 分隔，
+   每个文件开头加一行注释 "# 来源：文件名"。
+
+参考答案见下方注释：
+""")
+
+# # 答案2：tail 实现
+# from collections import deque
+# from pathlib import Path
+# def tail(path, n=10):
+#     with open(path, encoding="utf-8") as f:
+#         last_n = deque(f, maxlen=n)    # deque 自动只保留最后 n 行
+#     return list(last_n)
+#
+# # 答案3：原子写入
+# import tempfile, os
+# from pathlib import Path
+# def find_and_replace(path, old, new, out_path=None):
+#     path = Path(path)
+#     content = path.read_text(encoding="utf-8").replace(old, new)
+#     target = Path(out_path) if out_path else path
+#     # 写临时文件再原子替换，失败时原文件不受影响
+#     with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8",
+#                                      dir=target.parent, delete=False) as tmp:
+#         tmp.write(content)
+#         tmp_path = tmp.name
+#     os.replace(tmp_path, target)    # 原子替换

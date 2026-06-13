@@ -548,3 +548,39 @@ z_rank  = np.argsort(z_total)[::-1]
 print(f"\n按 Z-score 综合排名前3：")
 for rank, idx in enumerate(z_rank[:3], 1):
     print(f"  第{rank}名：S{idx+1}，Z-score总分 {z_total[idx]:.3f}，原始均分 {student_avg[idx]}")
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 创建一个 5×5 的矩阵，对角线为 1-5，其余为 0（不用循环，用 np.diag）。
+   然后计算该矩阵的行列式（np.linalg.det）和迹（np.trace）。
+
+2. 给定数组 a = np.array([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])：
+   a. 找出所有大于均值的元素及其索引
+   b. 把所有奇数替换为 -1（用布尔索引）
+   c. 计算相邻元素的差值（np.diff）
+
+3. 用 NumPy 模拟投掷两个骰子 10000 次，统计点数之和为 7 的概率，
+   与理论概率 6/36 ≈ 0.1667 对比。
+
+4. 实现矩阵乘法的手动版本（不用 np.dot 或 @），
+   用三层 for 循环，验证结果与 np.dot 一致。
+
+参考答案见下方注释：
+""")
+
+# # 答案1：
+# import numpy as np
+# mat = np.diag([1, 2, 3, 4, 5])
+# print(mat)
+# print(f"行列式：{np.linalg.det(mat):.0f}")   # 120 = 1*2*3*4*5
+# print(f"迹：{np.trace(mat)}")                 # 15 = 1+2+3+4+5
+#
+# # 答案3：骰子模拟
+# dice1 = np.random.randint(1, 7, 10000)
+# dice2 = np.random.randint(1, 7, 10000)
+# prob_7 = np.mean(dice1 + dice2 == 7)
+# print(f"模拟概率：{prob_7:.4f}，理论：{6/36:.4f}")
