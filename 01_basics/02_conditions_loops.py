@@ -151,3 +151,64 @@ for attempt, guess in enumerate(guesses, start=1):  # 记录第几次
         break                     # 猜对了立刻退出，不再继续
 else:                             # for-else：循环正常结束（没有 break）时执行
     print("所有猜测用完，未能猜中")  # 本例中不会到达这里
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 用 for 循环和 range() 打印九九乘法表（完整版，9行9列）。
+
+2. 用 while 循环求 1 到 100 中所有奇数的和（不用 range）。
+
+3. 给定列表 numbers = [4, 7, 2, 9, 1, 5, 8, 3, 6]：
+   a. 找出其中所有大于 5 的数，用 continue 跳过不符合的数
+   b. 当找到第一个大于 8 的数时立刻 break，打印该数及其索引
+   c. 用列表推导式生成一个新列表：每个元素如果是偶数则乘以 2，奇数则加 1
+
+4. 写一个函数 fizzbuzz(n)：遍历 1 到 n，
+   能被 3 整除打印 "Fizz"，能被 5 整除打印 "Buzz"，
+   能被 15 整除打印 "FizzBuzz"，其他打印数字本身。
+
+参考答案见下方注释：
+""")
+
+# # 答案1：九九乘法表
+# for i in range(1, 10):
+#     for j in range(1, i + 1):
+#         print(f"{j}×{i}={i*j}", end="\t")
+#     print()
+#
+# # 答案2：奇数和
+# total, n = 0, 1
+# while n <= 100:
+#     total += n
+#     n += 2
+# print(f"奇数和 = {total}")  # 2500
+#
+# # 答案3：
+# numbers = [4, 7, 2, 9, 1, 5, 8, 3, 6]
+# # a. continue
+# big = []
+# for n in numbers:
+#     if n <= 5: continue
+#     big.append(n)
+# print("大于5：", big)
+# # b. break
+# for i, n in enumerate(numbers):
+#     if n > 8:
+#         print(f"第一个 >8 的数：{n}，索引 {i}")
+#         break
+# # c. 列表推导式
+# result = [n * 2 if n % 2 == 0 else n + 1 for n in numbers]
+# print("变换后：", result)
+#
+# # 答案4：
+# def fizzbuzz(n):
+#     for i in range(1, n + 1):
+#         if i % 15 == 0:   print("FizzBuzz")
+#         elif i % 3 == 0:  print("Fizz")
+#         elif i % 5 == 0:  print("Buzz")
+#         else:             print(i)
+# fizzbuzz(20)

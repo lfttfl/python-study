@@ -205,3 +205,64 @@ def analyze_scores(*scores, passing=60):  # *args 接收任意数量成绩，pas
 report = analyze_scores(88, 72, 95, 54, 63, 41, 77, passing=60)
 for key, val in report.items():       # 遍历字典，逐行打印统计结果
     print(f"  {key}: {val}")
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 写函数 is_palindrome(s)，判断字符串 s 是否是回文（正读反读相同，忽略大小写和空格）。
+   例：is_palindrome("A man a plan a canal Panama") → True
+
+2. 写函数 flatten(*args)，接受任意数量的参数（可以是数字或列表），
+   把所有数字收集成一个扁平列表返回。
+   例：flatten(1, [2, 3], 4, [5, 6]) → [1, 2, 3, 4, 5, 6]
+
+3. 写函数 memoize(func)，接收一个函数，返回带缓存功能的版本（手动实现 functools.lru_cache）。
+   用它装饰一个计算第 n 个斐波那契数的函数，验证缓存效果。
+
+4. 写函数 make_adder(n)，返回一个函数，该函数把参数加上 n。
+   例：add5 = make_adder(5)，add5(3) → 8
+
+参考答案见下方注释：
+""")
+
+# # 答案1：
+# def is_palindrome(s):
+#     cleaned = "".join(c.lower() for c in s if c.isalnum())
+#     return cleaned == cleaned[::-1]
+# print(is_palindrome("A man a plan a canal Panama"))  # True
+# print(is_palindrome("hello"))                        # False
+#
+# # 答案2：
+# def flatten(*args):
+#     result = []
+#     for arg in args:
+#         if isinstance(arg, list):
+#             result.extend(arg)
+#         else:
+#             result.append(arg)
+#     return result
+# print(flatten(1, [2, 3], 4, [5, 6]))   # [1, 2, 3, 4, 5, 6]
+#
+# # 答案3：
+# def memoize(func):
+#     cache = {}
+#     def wrapper(*args):
+#         if args not in cache:
+#             cache[args] = func(*args)
+#         return cache[args]
+#     return wrapper
+#
+# @memoize
+# def fib(n):
+#     if n <= 1: return n
+#     return fib(n-1) + fib(n-2)
+# print(fib(35))   # 9227465
+#
+# # 答案4：
+# def make_adder(n):
+#     return lambda x: x + n
+# add5 = make_adder(5)
+# print(add5(3))   # 8

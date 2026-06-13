@@ -409,3 +409,58 @@ ranked = sorted(course_system.items(),
 for rank, (name, info) in enumerate(ranked, start=1):
     print(f"  第{rank}名：{name}  GPA={info['gpa']}  "
           f"课程={sorted(info['courses'])}")   # sorted 使集合以稳定顺序显示
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 给定句子 sentence = "to be or not to be that is the question"，
+   用字典统计每个单词出现的次数，然后找出只出现一次的所有单词。
+
+2. 两个班级的学生名单：
+   class_a = {"Alice", "Bob", "Charlie", "David"}
+   class_b = {"Bob", "Eve", "Charlie", "Frank"}
+   a. 只在 A 班的学生（A 独有）
+   b. 只在 B 班的学生（B 独有）
+   c. 两个班都有的学生（交集）
+   d. 至少在一个班的所有学生（并集）
+
+3. 用嵌套字典统计以下销售数据中每个产品每个月的总销量：
+   sales = [
+       ("苹果", "1月", 100), ("香蕉", "1月", 80), ("苹果", "2月", 120),
+       ("香蕉", "2月", 90),  ("苹果", "1月", 50),  ("香蕉", "3月", 70),
+   ]
+   结果格式：{"苹果": {"1月": 150, "2月": 120}, "香蕉": {...}}
+
+参考答案见下方注释：
+""")
+
+# # 答案1：
+# sentence = "to be or not to be that is the question"
+# freq = {}
+# for word in sentence.split():
+#     freq[word] = freq.get(word, 0) + 1
+# once = [w for w, c in freq.items() if c == 1]
+# print("只出现一次的词：", once)
+#
+# # 答案2：
+# class_a = {"Alice", "Bob", "Charlie", "David"}
+# class_b = {"Bob", "Eve", "Charlie", "Frank"}
+# print("A独有：", class_a - class_b)
+# print("B独有：", class_b - class_a)
+# print("共同：",  class_a & class_b)
+# print("全部：",  class_a | class_b)
+#
+# # 答案3：
+# from collections import defaultdict
+# sales = [
+#     ("苹果","1月",100),("香蕉","1月",80),("苹果","2月",120),
+#     ("香蕉","2月",90), ("苹果","1月",50),("香蕉","3月",70),
+# ]
+# summary = defaultdict(lambda: defaultdict(int))
+# for product, month, qty in sales:
+#     summary[product][month] += qty
+# for product, months in sorted(summary.items()):
+#     print(f"  {product}: {dict(months)}")

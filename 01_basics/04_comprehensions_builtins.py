@@ -304,3 +304,43 @@ print("有满分：", any_perfect)           # False
 # 第六步：生成器表达式高效求平均（不生成中间列表）
 avg = sum(s for _, s in raw) / len(raw)  # 生成器直接传给 sum()
 print(f"班级平均分：{avg:.1f}")          # 保留一位小数
+
+# ══════════════════════════════════════════════════════
+# 练习题
+# ══════════════════════════════════════════════════════
+
+print("\n══ 练习题 ══")
+print("""
+1. 用列表推导式生成 1-50 内所有同时能被 3 和 5 整除的数。
+
+2. 用字典推导式把列表 words = ["hello","world","python","data"] 转为
+   {单词: 单词长度} 的字典，只保留长度大于 4 的单词。
+
+3. 用 zip + map + filter 的组合（不用 for 循环）：
+   给定 names=["Alice","Bob","Carol"] 和 scores=[85, 42, 91]，
+   生成只包含及格学生（>=60）的 [(姓名, 成绩)] 列表。
+
+4. 用生成器表达式计算 1 到 10000 内所有完全平方数的和。
+   （提示：完全平方数即 sqrt(n) 是整数，用 n**0.5 % 1 == 0 判断）
+
+参考答案见下方注释：
+""")
+
+# # 答案1：
+# result = [n for n in range(1, 51) if n % 3 == 0 and n % 5 == 0]
+# print(result)   # [15, 30, 45]
+#
+# # 答案2：
+# words = ["hello", "world", "python", "data"]
+# length_dict = {w: len(w) for w in words if len(w) > 4}
+# print(length_dict)   # {'hello': 5, 'world': 5, 'python': 6}
+#
+# # 答案3：
+# names  = ["Alice", "Bob", "Carol"]
+# scores = [85, 42, 91]
+# passing = list(filter(lambda x: x[1] >= 60, zip(names, scores)))
+# print(passing)   # [('Alice', 85), ('Carol', 91)]
+#
+# # 答案4：
+# total = sum(n for n in range(1, 10001) if n**0.5 % 1 == 0)
+# print(total)   # 25164150
